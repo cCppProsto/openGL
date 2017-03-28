@@ -38,8 +38,11 @@ int main()
     glLoadIdentity();
     glOrtho(0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0, 1);
     glfwSwapInterval(1);
+
+    glEnable(GL_SMOOTH);
     glDisable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_LINE_SMOOTH);
     glEnable(GL_POINT_SMOOTH);
     glEnable(GL_TEXTURE_2D);
@@ -60,6 +63,7 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
+        glClearColor(0, 1.0f, 0, 0);
 
         draw_texture(50, 50, 50, 50, text[0]);
 
@@ -84,16 +88,16 @@ GLuint load_texture(const char *apFileName)
     texture = SOIL_load_OGL_texture(apFileName,
                                      SOIL_LOAD_AUTO,
                                      SOIL_CREATE_NEW_ID,
-                                     SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_MULTIPLY_ALPHA);
+                                     SOIL_FLAG_POWER_OF_TWO);
     return texture;
 }
 //------------------------------------------------------------------------------
 void draw_texture(int aX, int aY, int aW, int aH, GLuint aTextID)
 {
-    glBindTexture(GL_TEXTURE_2D, aTextID);
     glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, aTextID);
     glBegin(GL_QUADS);
-        glColor3f(255,255,255);
+        //glColor3f(255,255,255);
         glTexCoord2i(0, 0); glVertex2i(aX,      aY);
         glTexCoord2i(1, 0); glVertex2i(aX + aW, aY);
         glTexCoord2i(1, 1); glVertex2i(aX + aW, aY + aH);
