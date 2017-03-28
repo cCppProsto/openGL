@@ -50,7 +50,7 @@ int main()
     // path to texture, for working from QT IDE usually:
     // buildFolder/pics/test.png
     // for it case:
-    // ../build-openGL-Desktop_Qt_5_4_2_MinGW_32bit-Debug/textureSOIL/
+    // ../build/textureSOIL/
     text[0] = load_texture("pics/test.png");
     text[1] = load_texture("pics/info_128.png");
     text[2] = load_texture("pics/settings_128.png");
