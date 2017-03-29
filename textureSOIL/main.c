@@ -63,13 +63,13 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
-        glClearColor(0, 1.0f, 0, 0);
+        glClearColor(0, 0.0f, 1.0f, 0);
 
-        draw_texture(50, 50, 50, 50, text[0]);
+        draw_texture(0, 0, 50, 50, text[0]);
 
-        draw_texture(150, 50, 50, 50, text[1]);
+        draw_texture(0, 100, 50, 50, text[1]);
 
-        draw_texture(150, 150, 150, 150, text[2]);
+        draw_texture(0, 200, 150, 150, text[2]);
 
 
         /* Swap front and back buffers */
@@ -97,11 +97,25 @@ void draw_texture(int aX, int aY, int aW, int aH, GLuint aTextID)
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, aTextID);
     glBegin(GL_QUADS);
-        //glColor3f(255,255,255);
         glTexCoord2i(0, 0); glVertex2i(aX,      aY);
         glTexCoord2i(1, 0); glVertex2i(aX + aW, aY);
         glTexCoord2i(1, 1); glVertex2i(aX + aW, aY + aH);
         glTexCoord2i(0, 1); glVertex2i(aX,      aY + aH);
     glEnd();
+
+    glBegin(GL_QUADS);
+        glTexCoord2i(1, 0); glVertex2i(aX + 150,      aY);
+        glTexCoord2i(1, 1); glVertex2i(aX + aW +150, aY);
+        glTexCoord2i(0, 1); glVertex2i(aX + aW +150, aY + aH);
+        glTexCoord2i(0, 0); glVertex2i(aX +150,      aY + aH);
+    glEnd();
+
+    glBegin(GL_QUADS);
+        glTexCoord2i(1, 1); glVertex2i(aX + 250,      aY);
+        glTexCoord2i(0, 1); glVertex2i(aX + aW +250, aY);
+        glTexCoord2i(0, 0); glVertex2i(aX + aW +250, aY + aH);
+        glTexCoord2i(1, 0); glVertex2i(aX +250,      aY + aH);
+    glEnd();
+
     glDisable(GL_TEXTURE_2D);
 }

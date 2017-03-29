@@ -3,6 +3,8 @@ CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
 
+QMAKE_LFLAGS += -static-libgcc
+
 QMAKE_CFLAGS += -std=c11
 
 QT   += opengl
